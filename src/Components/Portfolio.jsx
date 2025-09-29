@@ -31,28 +31,28 @@ const imageAltText = "desktop with books and laptop";
  */
 const projectList = [
   {
-    title: "10 Things To Know About Azure Static Web Apps 🎉",
+    title: "Full-Stack Web Applications",
     description:
-      "Collaboration to create a beginner friendly article to help explain Azure Static Web Apps and tooling to get started.",
-    url: "https://dev.to/azure/10-things-to-know-about-azure-static-web-apps-3n4i",
+      "Developed scalable web applications using Django and Flask backends with ReactJS frontends, implementing RESTful APIs and database optimization for enhanced performance.",
+    url: "https://github.com/SABRI001",
   },
   {
-    title: "Web Development for Beginners",
+    title: "Database Management Systems",
     description:
-      "Contributed sketch note imagery to accompany each lesson. These help provide visual representation of what is being taught.",
-    url: "https://github.com/microsoft/web-dev-for-beginners",
+      "Designed and implemented robust database solutions using MySQL and PostgreSQL, ensuring data integrity and optimized query performance for enterprise applications.",
+    url: "https://github.com/SABRI001",
   },
   {
-    title: "My Resume Site",
+    title: "Cloud Computing Solutions",
     description:
-      "Created from Microsoft's resume workshop and deployed to GitHub pages. Includes my experience and design abilities.",
-    url: "https://github.com/microsoft/workshop-library/tree/main/full/build-resume-website",
+      "Architected and deployed cloud-based applications with focus on scalability and reliability, utilizing modern DevOps practices and API development.",
+    url: "https://github.com/SABRI001",
   },
   {
-    title: "GitHub Codespaces and github.dev",
+    title: "Network Infrastructure Projects",
     description:
-      "Video interview to explain when to use GitHub.dev versus GitHub Codespaces, and how best to use each tool.",
-    url: "https://www.youtube.com/watch?v=c3hHhRME_XI",
+      "Applied Cisco CCNA expertise in designing network solutions, implementing TCP/IP protocols and OSI model principles for enterprise networking requirements.",
+    url: "https://github.com/SABRI001",
   },
 ];
 
