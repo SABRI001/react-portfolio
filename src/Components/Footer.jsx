@@ -7,7 +7,7 @@
  *
  * If a social value has an empty string it will not be displayed.
  */
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
 import devDotToIcon from "../images/socials/devdotto.svg";
@@ -40,6 +40,20 @@ const Footer = (props) => {
     youTube,
   } = props;
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Handle responsive design
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   return (
     <div
       id="footer"
@@ -47,8 +61,8 @@ const Footer = (props) => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        gap: "2.5rem",
-        padding: "5rem 0 3rem",
+        gap: isMobile ? "2rem" : "2.5rem",
+        padding: isMobile ? "3rem 1rem 2rem" : "5rem 0 3rem",
         background: "linear-gradient(135deg, #0f1419 0%, #1a1f36 50%, #0f1419 100%)",
         width: "100vw",
         position: "relative",
@@ -90,9 +104,11 @@ const Footer = (props) => {
         style={{
           display: "flex",
           justifyContent: "center",
-          gap: "2.5rem",
+          gap: isMobile ? "1.5rem" : "2.5rem",
           position: "relative",
-          zIndex: 2
+          zIndex: 2,
+          flexWrap: "wrap",
+          padding: isMobile ? "0 1rem" : "0"
         }}
       >
         {email && (

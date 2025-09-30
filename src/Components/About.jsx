@@ -4,7 +4,7 @@
  * Space for you to describe more about yourself.
  */
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 /**
  * About background image
@@ -54,6 +54,22 @@ const detailOrQuote =
   "I am passionate about developing scalable software solutions that enhance system performance and user experience. With expertise in both front-end and back-end development, I collaborate effectively with cross-functional teams to deliver high-quality applications. My goal is to contribute to impactful projects while continuously expanding my technical expertise.";
 
 const About = () => {
+  const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
+
+  // Handle responsive design
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth <= 768);
+      setIsTablet(window.innerWidth > 768 && window.innerWidth <= 1024);
+    };
+    
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+
   return (
     <section className="padding" id="about" style={{
       background: "linear-gradient(135deg, #0f1419 0%, #1a1f36 50%, #0f1419 100%)",
@@ -94,16 +110,17 @@ const About = () => {
       {/* Section Header */}
       <div style={{
         textAlign: "center",
-        marginBottom: "3rem",
+        marginBottom: isMobile ? "2rem" : "3rem",
         position: "relative",
-        zIndex: 2
+        zIndex: 2,
+        padding: isMobile ? "0 1rem" : "0"
       }}>
         <h2 style={{
           background: "linear-gradient(135deg, #ffffff, #e0f2fe)",
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
           backgroundClip: "text",
-          fontSize: "3rem",
+          fontSize: isMobile ? "2rem" : isTablet ? "2.5rem" : "3rem",
           fontWeight: "bold",
           margin: "0 0 1rem 0",
           textShadow: "0 4px 8px rgba(0,0,0,0.3)",
@@ -125,7 +142,7 @@ const About = () => {
       <div style={{
         maxWidth: "1200px",
         margin: "0 auto",
-        padding: "0 2rem",
+        padding: isMobile ? "0 1rem" : isTablet ? "0 1.5rem" : "0 2rem",
         position: "relative",
         zIndex: 2
       }}>
@@ -134,17 +151,17 @@ const About = () => {
         <div style={{
           background: "rgba(255, 255, 255, 0.1)",
           backdropFilter: "blur(20px)",
-          borderRadius: "25px",
+          borderRadius: isMobile ? "20px" : "25px",
           border: "1px solid rgba(255, 255, 255, 0.2)",
-          padding: "3rem",
-          marginBottom: "3rem",
+          padding: isMobile ? "2rem 1.5rem" : isTablet ? "2.5rem" : "3rem",
+          marginBottom: isMobile ? "2rem" : "3rem",
           boxShadow: "0 25px 50px rgba(0, 0, 0, 0.1)",
           animation: "fadeInUp 0.8s ease-out 0.5s both",
           textAlign: "center"
         }}>
           <p style={{
             color: "rgba(255, 255, 255, 0.9)",
-            fontSize: "1.3rem",
+            fontSize: isMobile ? "1.1rem" : isTablet ? "1.2rem" : "1.3rem",
             lineHeight: "1.8",
             margin: "0",
             fontWeight: "300",
@@ -155,8 +172,8 @@ const About = () => {
         {/* Skills and Quote Section */}
         <div style={{
           display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: "3rem",
+          gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+          gap: isMobile ? "2rem" : "3rem",
           alignItems: "start"
         }}>
           
@@ -164,33 +181,33 @@ const About = () => {
           <div style={{
             background: "rgba(255, 255, 255, 0.1)",
             backdropFilter: "blur(20px)",
-            borderRadius: "25px",
+            borderRadius: isMobile ? "20px" : "25px",
             border: "1px solid rgba(255, 255, 255, 0.2)",
-            padding: "3rem",
+            padding: isMobile ? "2rem 1.5rem" : isTablet ? "2.5rem" : "3rem",
             boxShadow: "0 25px 50px rgba(0, 0, 0, 0.1)",
             animation: "slideInLeft 0.8s ease-out 0.7s both"
           }}>
             <h3 style={{
               color: "#ffffff",
-              fontSize: "1.8rem",
+              fontSize: isMobile ? "1.5rem" : isTablet ? "1.7rem" : "1.8rem",
               fontWeight: "600",
-              marginBottom: "2rem",
+              marginBottom: isMobile ? "1.5rem" : "2rem",
               textAlign: "center",
               textShadow: "0 2px 4px rgba(0,0,0,0.3)"
             }}>Technical Skills</h3>
 
             <div style={{
               display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "1rem"
+              gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+              gap: isMobile ? "0.8rem" : "1rem"
             }}>
               {skillsList.map((skill, index) => (
                 <div
                   key={skill}
                   style={{
                     background: "rgba(255, 255, 255, 0.1)",
-                    borderRadius: "15px",
-                    padding: "1rem",
+                    borderRadius: isMobile ? "12px" : "15px",
+                    padding: isMobile ? "0.8rem" : "1rem",
                     border: "1px solid rgba(255, 255, 255, 0.1)",
                     transition: "all 0.3s ease",
                     cursor: "pointer",
@@ -223,7 +240,7 @@ const About = () => {
                   
                   <div style={{
                     color: "rgba(255, 255, 255, 0.9)",
-                    fontSize: "0.95rem",
+                    fontSize: isMobile ? "0.9rem" : "0.95rem",
                     fontWeight: "500",
                     textShadow: "0 1px 2px rgba(0,0,0,0.3)"
                   }}>{skill}</div>
@@ -236,9 +253,9 @@ const About = () => {
           <div style={{
             background: "rgba(255, 255, 255, 0.1)",
             backdropFilter: "blur(20px)",
-            borderRadius: "25px",
+            borderRadius: isMobile ? "20px" : "25px",
             border: "1px solid rgba(255, 255, 255, 0.2)",
-            padding: "3rem",
+            padding: isMobile ? "2rem 1.5rem" : isTablet ? "2.5rem" : "3rem",
             boxShadow: "0 25px 50px rgba(0, 0, 0, 0.1)",
             animation: "slideInRight 0.8s ease-out 0.7s both",
             display: "flex",
@@ -248,7 +265,7 @@ const About = () => {
           }}>
             {/* Quote icon */}
             <div style={{
-              fontSize: "4rem",
+              fontSize: isMobile ? "3rem" : "4rem",
               color: "rgba(255, 255, 255, 0.2)",
               fontFamily: "Georgia, serif",
               lineHeight: "1",
@@ -257,7 +274,7 @@ const About = () => {
 
             <h3 style={{
               color: "#ffffff",
-              fontSize: "1.8rem",
+              fontSize: isMobile ? "1.5rem" : isTablet ? "1.7rem" : "1.8rem",
               fontWeight: "600",
               marginBottom: "1.5rem",
               textShadow: "0 2px 4px rgba(0,0,0,0.3)"
@@ -265,7 +282,7 @@ const About = () => {
 
             <p style={{
               color: "rgba(255, 255, 255, 0.9)",
-              fontSize: "1.1rem",
+              fontSize: isMobile ? "1rem" : "1.1rem",
               lineHeight: "1.7",
               margin: "0",
               fontStyle: "italic",
@@ -276,8 +293,8 @@ const About = () => {
             <div style={{
               marginTop: "2rem",
               display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "1rem"
+              gridTemplateColumns: isMobile ? "1fr 1fr" : "1fr 1fr",
+              gap: isMobile ? "0.8rem" : "1rem"
             }}>
               {[
                 { label: "Years Experience", value: "2+" },
@@ -287,20 +304,20 @@ const About = () => {
               ].map((item, i) => (
                 <div key={item.label} style={{
                   textAlign: "center",
-                  padding: "1rem",
+                  padding: isMobile ? "0.8rem" : "1rem",
                   background: "rgba(255, 255, 255, 0.05)",
                   borderRadius: "10px",
                   animation: `fadeInUp 0.6s ease-out ${1.2 + i * 0.1}s both`
                 }}>
                   <div style={{
                     color: "#ffffff",
-                    fontSize: "1.2rem",
+                    fontSize: isMobile ? "1rem" : "1.2rem",
                     fontWeight: "bold",
                     marginBottom: "0.3rem"
                   }}>{item.value}</div>
                   <div style={{
                     color: "rgba(255, 255, 255, 0.7)",
-                    fontSize: "0.8rem"
+                    fontSize: isMobile ? "0.7rem" : "0.8rem"
                   }}>{item.label}</div>
                 </div>
               ))}

@@ -8,7 +8,7 @@
  * as you continue to learn and create.
  */
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 /**
  * Desk image
@@ -57,6 +57,22 @@ const projectList = [
 ];
 
 const Portfolio = () => {
+  const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
+
+  // Handle responsive design
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth <= 768);
+      setIsTablet(window.innerWidth > 768 && window.innerWidth <= 1024);
+    };
+    
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+
   return (
     <section className="padding" id="portfolio" style={{
       background: "linear-gradient(135deg, #0f1419 0%, #1a1f36 50%, #0f1419 100%)",
@@ -96,16 +112,17 @@ const Portfolio = () => {
       {/* Section Header */}
       <div style={{
         textAlign: "center",
-        marginBottom: "4rem",
+        marginBottom: isMobile ? "2rem" : "4rem",
         position: "relative",
-        zIndex: 2
+        zIndex: 2,
+        padding: isMobile ? "0 1rem" : "0"
       }}>
         <h2 style={{
           background: "linear-gradient(135deg, #ffffff, #e0f2fe)",
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
           backgroundClip: "text",
-          fontSize: "3rem",
+          fontSize: isMobile ? "2rem" : isTablet ? "2.5rem" : "3rem",
           fontWeight: "bold",
           margin: "0 0 1rem 0",
           textShadow: "0 4px 8px rgba(0,0,0,0.3)",
@@ -126,20 +143,20 @@ const Portfolio = () => {
       {/* Portfolio Content Container */}
       <div style={{
         display: "flex",
-        flexDirection: "row",
+        flexDirection: isMobile ? "column" : "row",
         alignItems: "stretch",
-        gap: "3rem",
+        gap: isMobile ? "2rem" : "3rem",
         maxWidth: "1400px",
         margin: "0 auto",
         position: "relative",
         zIndex: 2,
-        padding: "0 2rem"
+        padding: isMobile ? "0 1rem" : isTablet ? "0 1.5rem" : "0 2rem"
       }}>
         
         {/* Left Side - Tech Visualization */}
         <div style={{
           flex: "1",
-          maxWidth: "500px",
+          maxWidth: isMobile ? "100%" : "500px",
           position: "relative",
           height: "100%",
           display: "flex"
@@ -148,9 +165,9 @@ const Portfolio = () => {
           <div style={{
             background: "rgba(255, 255, 255, 0.1)",
             backdropFilter: "blur(20px)",
-            borderRadius: "25px",
+            borderRadius: isMobile ? "20px" : "25px",
             border: "1px solid rgba(255, 255, 255, 0.2)",
-            padding: "2rem",
+            padding: isMobile ? "1.5rem" : "2rem",
             boxShadow: "0 25px 50px rgba(0, 0, 0, 0.1)",
             animation: "slideInLeft 0.8s ease-out 0.5s both",
             display: "flex",
@@ -164,7 +181,7 @@ const Portfolio = () => {
               position: "relative",
               background: "linear-gradient(135deg, #2563EB, #1d4ed8)",
               flex: "1 1 auto",
-              minHeight: "300px"
+              minHeight: isMobile ? "200px" : "300px"
             }}>
               {/* Tech pattern overlay */}
               <div style={{
@@ -185,7 +202,7 @@ const Portfolio = () => {
                 style={{
                   width: "100%",
                   height: "100%",
-                  minHeight: "400px",
+                  minHeight: isMobile ? "250px" : "400px",
                   objectFit: "cover",
                   transition: "transform 0.5s ease",
                   filter: "brightness(0.8) contrast(1.1)"
@@ -204,8 +221,8 @@ const Portfolio = () => {
             <div style={{
               marginTop: "1.5rem",
               display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "1rem",
+              gridTemplateColumns: isMobile ? "1fr 1fr" : "1fr 1fr",
+              gap: isMobile ? "0.8rem" : "1rem",
               flex: "0 0 auto"
             }}>
               {[
@@ -216,20 +233,20 @@ const Portfolio = () => {
               ].map((stat, i) => (
                 <div key={stat.label} style={{
                   textAlign: "center",
-                  padding: "1rem",
+                  padding: isMobile ? "0.8rem" : "1rem",
                   background: "rgba(255, 255, 255, 0.1)",
                   borderRadius: "15px",
                   border: "1px solid rgba(255, 255, 255, 0.1)",
                   animation: `fadeInUp 0.6s ease-out ${0.8 + i * 0.1}s both`
                 }}>
                   <div style={{
-                    fontSize: "1.5rem",
+                    fontSize: isMobile ? "1.2rem" : "1.5rem",
                     fontWeight: "bold",
                     color: "#ffffff",
                     marginBottom: "0.5rem"
                   }}>{stat.value}</div>
                   <div style={{
-                    fontSize: "0.9rem",
+                    fontSize: isMobile ? "0.8rem" : "0.9rem",
                     color: "rgba(255, 255, 255, 0.8)"
                   }}>{stat.label}</div>
                 </div>
@@ -242,8 +259,8 @@ const Portfolio = () => {
         <div style={{
           flex: "1",
           display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: "1.5rem",
+          gridTemplateColumns: isMobile ? "1fr" : isTablet ? "1fr" : "1fr 1fr",
+          gap: isMobile ? "1rem" : "1.5rem",
           alignContent: "start"
         }}>
           {projectList.map((project, index) => (
@@ -252,9 +269,9 @@ const Portfolio = () => {
               style={{
                 background: "rgba(255, 255, 255, 0.1)",
                 backdropFilter: "blur(20px)",
-                borderRadius: "20px",
+                borderRadius: isMobile ? "15px" : "20px",
                 border: "1px solid rgba(255, 255, 255, 0.2)",
-                padding: "2rem 1.5rem",
+                padding: isMobile ? "1.5rem 1rem" : "2rem 1.5rem",
                 boxShadow: "0 15px 35px rgba(0, 0, 0, 0.1)",
                 transition: "all 0.4s ease",
                 cursor: "pointer",
@@ -320,7 +337,7 @@ const Portfolio = () => {
 
               <h3 style={{
                 color: "#ffffff",
-                fontSize: "1.3rem",
+                fontSize: isMobile ? "1.1rem" : "1.3rem",
                 fontWeight: "600",
                 margin: "0 0 1rem 0",
                 transition: "color 0.3s ease"
@@ -328,7 +345,7 @@ const Portfolio = () => {
 
               <p style={{
                 color: "rgba(255, 255, 255, 0.8)",
-                fontSize: "0.95rem",
+                fontSize: isMobile ? "0.9rem" : "0.95rem",
                 lineHeight: "1.6",
                 margin: "0 0 1.5rem 0"
               }}>{project.description}</p>
@@ -338,7 +355,7 @@ const Portfolio = () => {
                 display: "flex",
                 alignItems: "center",
                 color: "#2563EB",
-                fontSize: "0.9rem",
+                fontSize: isMobile ? "0.85rem" : "0.9rem",
                 fontWeight: "600",
                 transition: "all 0.3s ease"
               }}>

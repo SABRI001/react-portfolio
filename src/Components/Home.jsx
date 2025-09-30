@@ -5,7 +5,7 @@
  * choice, name and title that describes your career focus.
  */
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import arrowSvg from "../images/down-arrow.svg";
 import PropTypes from "prop-types";
 
@@ -25,6 +25,22 @@ import image from "../images/profile-img.jpg";
 const imageAltText = "Professional software developer workspace";
 
 const Home = ({ name, title }) => {
+  const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
+
+  // Handle responsive design
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth <= 768);
+      setIsTablet(window.innerWidth > 768 && window.innerWidth <= 1024);
+    };
+    
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+
   return (
     <section id="home" className="min-height" style={{ position: "relative", overflow: "hidden" }}>
       {/* Animated Gradient Background */}
@@ -216,21 +232,21 @@ const Home = ({ name, title }) => {
         transform: "translate(-50%, -50%)",
         textAlign: "center",
         zIndex: 10,
-        width: "90%",
-        maxWidth: "800px",
+        width: isMobile ? "95%" : "90%",
+        maxWidth: isMobile ? "400px" : isTablet ? "600px" : "800px",
         background: "rgba(255, 255, 255, 0.1)",
         backdropFilter: "blur(20px)",
-        borderRadius: "30px",
+        borderRadius: isMobile ? "20px" : "30px",
         border: "1px solid rgba(255, 255, 255, 0.2)",
-        padding: "3rem 2rem",
+        padding: isMobile ? "2rem 1.5rem" : isTablet ? "2.5rem 2rem" : "3rem 2rem",
         boxShadow: "0 25px 50px rgba(0, 0, 0, 0.1)"
       }}>
         {/* Profile image */}
         <div style={{
-          width: "200px",
-          height: "200px",
+          width: isMobile ? "150px" : isTablet ? "175px" : "200px",
+          height: isMobile ? "150px" : isTablet ? "175px" : "200px",
           borderRadius: "50%",
-          margin: "0 auto 2rem",
+          margin: isMobile ? "0 auto 1.5rem" : "0 auto 2rem",
           overflow: "hidden",
           border: "4px solid rgba(255, 255, 255, 0.3)",
           boxShadow: "0 20px 40px rgba(0,0,0,0.2), 0 0 20px rgba(37, 99, 235, 0.3)",
@@ -282,7 +298,7 @@ const Home = ({ name, title }) => {
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             backgroundClip: "text",
-            fontSize: "4rem",
+            fontSize: isMobile ? "2.5rem" : isTablet ? "3rem" : "4rem",
             fontWeight: "bold",
             margin: "0 0 1rem 0",
             textShadow: "0 4px 8px rgba(0,0,0,0.3)",
@@ -292,11 +308,12 @@ const Home = ({ name, title }) => {
           
           <h2 style={{
             color: "rgba(255, 255, 255, 0.9)",
-            fontSize: "1.8rem",
+            fontSize: isMobile ? "1.2rem" : isTablet ? "1.5rem" : "1.8rem",
             fontWeight: "300",
-            margin: "0 0 2rem 0",
+            margin: isMobile ? "0 0 1.5rem 0" : "0 0 2rem 0",
             textShadow: "2px 2px 8px rgba(0,0,0,0.3)",
-            animation: "fadeInUp 1.2s ease-out 0.6s both"
+            animation: "fadeInUp 1.2s ease-out 0.6s both",
+            lineHeight: "1.4"
           }}>{title}</h2>
           
           {/* Call to action button */}
@@ -304,9 +321,9 @@ const Home = ({ name, title }) => {
             background: "linear-gradient(135deg, rgba(37, 99, 235, 0.8), rgba(29, 78, 216, 0.8))",
             color: "white",
             border: "2px solid rgba(255, 255, 255, 0.3)",
-            padding: "1rem 2rem",
+            padding: isMobile ? "0.8rem 1.5rem" : "1rem 2rem",
             borderRadius: "50px",
-            fontSize: "1.1rem",
+            fontSize: isMobile ? "1rem" : "1.1rem",
             fontWeight: "600",
             cursor: "pointer",
             backdropFilter: "blur(10px)",
