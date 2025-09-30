@@ -55,35 +55,258 @@ const detailOrQuote =
 
 const About = () => {
   return (
-    <section className="padding" id="about">
-      <img className="background" src={image} alt={imageAltText} />
-      <div
-        style={{
-          backgroundColor: "white",
-          width: "50%",
-          padding: "4rem",
-          margin: "3rem auto",
-          textAlign: "center",
-        }}
-      >
-        <h2>About Myself</h2>
-        <p className="large">{description}</p>
-        <hr />
-        <ul
-          style={{
-            textAlign: "left",
-            columns: 2,
-            fontSize: "1.25rem",
-            margin: "2rem 3rem",
-            gap: "3rem",
-          }}
-        >
-          {skillsList.map((skill) => (
-            <li key={skill}>{skill}</li>
-          ))}
-        </ul>
-        <hr />
-        <p style={{ padding: "1rem 3rem 0" }}>{detailOrQuote}</p>
+    <section className="padding" id="about" style={{
+      background: "linear-gradient(135deg, #0f1419 0%, #1a1f36 50%, #0f1419 100%)",
+      position: "relative",
+      overflow: "hidden",
+      minHeight: "100vh"
+    }}>
+      {/* Animated Background Elements */}
+      <div style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        zIndex: 1,
+        pointerEvents: "none"
+      }}>
+        {/* Floating geometric shapes */}
+        {[...Array(12)].map((_, i) => (
+          <div
+            key={`bg-shape-${i}`}
+            style={{
+              position: "absolute",
+              width: `${8 + i * 3}px`,
+              height: `${8 + i * 3}px`,
+              background: `rgba(37, 99, 235, ${0.1 - i * 0.005})`,
+              borderRadius: i % 2 === 0 ? "50%" : "0%",
+              top: `${5 + i * 8}%`,
+              left: `${3 + i * 8}%`,
+              animation: `floatingCircle ${4 + i * 0.3}s infinite ease-in-out`,
+              animationDelay: `${i * 0.2}s`,
+              transform: i % 3 === 0 ? "rotate(45deg)" : "rotate(0deg)"
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Section Header */}
+      <div style={{
+        textAlign: "center",
+        marginBottom: "3rem",
+        position: "relative",
+        zIndex: 2
+      }}>
+        <h2 style={{
+          background: "linear-gradient(135deg, #ffffff, #e0f2fe)",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          backgroundClip: "text",
+          fontSize: "3rem",
+          fontWeight: "bold",
+          margin: "0 0 1rem 0",
+          textShadow: "0 4px 8px rgba(0,0,0,0.3)",
+          animation: "fadeInUp 0.8s ease-out",
+          filter: "drop-shadow(0 0 10px rgba(255,255,255,0.3))"
+        }}>About Myself</h2>
+        
+        <div style={{
+          width: "120px",
+          height: "4px",
+          background: "linear-gradient(135deg, #ffffff, #e0f2fe)",
+          margin: "0 auto",
+          borderRadius: "2px",
+          animation: "slideInLeft 0.8s ease-out 0.3s both"
+        }} />
+      </div>
+
+      {/* Main Content Container */}
+      <div style={{
+        maxWidth: "1200px",
+        margin: "0 auto",
+        padding: "0 2rem",
+        position: "relative",
+        zIndex: 2
+      }}>
+        
+        {/* Top Section - Description */}
+        <div style={{
+          background: "rgba(255, 255, 255, 0.1)",
+          backdropFilter: "blur(20px)",
+          borderRadius: "25px",
+          border: "1px solid rgba(255, 255, 255, 0.2)",
+          padding: "3rem",
+          marginBottom: "3rem",
+          boxShadow: "0 25px 50px rgba(0, 0, 0, 0.1)",
+          animation: "fadeInUp 0.8s ease-out 0.5s both",
+          textAlign: "center"
+        }}>
+          <p style={{
+            color: "rgba(255, 255, 255, 0.9)",
+            fontSize: "1.3rem",
+            lineHeight: "1.8",
+            margin: "0",
+            fontWeight: "300",
+            textShadow: "0 2px 4px rgba(0,0,0,0.3)"
+          }}>{description}</p>
+        </div>
+
+        {/* Skills and Quote Section */}
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: "3rem",
+          alignItems: "start"
+        }}>
+          
+          {/* Skills Section */}
+          <div style={{
+            background: "rgba(255, 255, 255, 0.1)",
+            backdropFilter: "blur(20px)",
+            borderRadius: "25px",
+            border: "1px solid rgba(255, 255, 255, 0.2)",
+            padding: "3rem",
+            boxShadow: "0 25px 50px rgba(0, 0, 0, 0.1)",
+            animation: "slideInLeft 0.8s ease-out 0.7s both"
+          }}>
+            <h3 style={{
+              color: "#ffffff",
+              fontSize: "1.8rem",
+              fontWeight: "600",
+              marginBottom: "2rem",
+              textAlign: "center",
+              textShadow: "0 2px 4px rgba(0,0,0,0.3)"
+            }}>Technical Skills</h3>
+
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "1rem"
+            }}>
+              {skillsList.map((skill, index) => (
+                <div
+                  key={skill}
+                  style={{
+                    background: "rgba(255, 255, 255, 0.1)",
+                    borderRadius: "15px",
+                    padding: "1rem",
+                    border: "1px solid rgba(255, 255, 255, 0.1)",
+                    transition: "all 0.3s ease",
+                    cursor: "pointer",
+                    animation: `fadeInUp 0.6s ease-out ${0.9 + index * 0.1}s both`,
+                    position: "relative",
+                    overflow: "hidden"
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = "rgba(37, 99, 235, 0.2)";
+                    e.currentTarget.style.borderColor = "rgba(37, 99, 235, 0.4)";
+                    e.currentTarget.style.transform = "translateY(-3px) scale(1.02)";
+                    e.currentTarget.style.boxShadow = "0 10px 25px rgba(37, 99, 235, 0.2)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "rgba(255, 255, 255, 0.1)";
+                    e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.1)";
+                    e.currentTarget.style.transform = "translateY(0) scale(1)";
+                    e.currentTarget.style.boxShadow = "none";
+                  }}
+                >
+                  {/* Skill icon */}
+                  <div style={{
+                    width: "8px",
+                    height: "8px",
+                    background: "linear-gradient(135deg, #ffffff, #e0f2fe)",
+                    borderRadius: "50%",
+                    marginBottom: "0.5rem",
+                    boxShadow: "0 0 10px rgba(255,255,255,0.5)"
+                  }} />
+                  
+                  <div style={{
+                    color: "rgba(255, 255, 255, 0.9)",
+                    fontSize: "0.95rem",
+                    fontWeight: "500",
+                    textShadow: "0 1px 2px rgba(0,0,0,0.3)"
+                  }}>{skill}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Quote/Detail Section */}
+          <div style={{
+            background: "rgba(255, 255, 255, 0.1)",
+            backdropFilter: "blur(20px)",
+            borderRadius: "25px",
+            border: "1px solid rgba(255, 255, 255, 0.2)",
+            padding: "3rem",
+            boxShadow: "0 25px 50px rgba(0, 0, 0, 0.1)",
+            animation: "slideInRight 0.8s ease-out 0.7s both",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            position: "relative"
+          }}>
+            {/* Quote icon */}
+            <div style={{
+              fontSize: "4rem",
+              color: "rgba(255, 255, 255, 0.2)",
+              fontFamily: "Georgia, serif",
+              lineHeight: "1",
+              marginBottom: "1rem"
+            }}>"</div>
+
+            <h3 style={{
+              color: "#ffffff",
+              fontSize: "1.8rem",
+              fontWeight: "600",
+              marginBottom: "1.5rem",
+              textShadow: "0 2px 4px rgba(0,0,0,0.3)"
+            }}>My Philosophy</h3>
+
+            <p style={{
+              color: "rgba(255, 255, 255, 0.9)",
+              fontSize: "1.1rem",
+              lineHeight: "1.7",
+              margin: "0",
+              fontStyle: "italic",
+              textShadow: "0 1px 2px rgba(0,0,0,0.3)"
+            }}>{detailOrQuote}</p>
+
+            {/* Professional highlights */}
+            <div style={{
+              marginTop: "2rem",
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "1rem"
+            }}>
+              {[
+                { label: "Years Experience", value: "2+" },
+                { label: "Location", value: "Malaysia" },
+                { label: "Focus", value: "Full-Stack" },
+                { label: "Approach", value: "Scalable" }
+              ].map((item, i) => (
+                <div key={item.label} style={{
+                  textAlign: "center",
+                  padding: "1rem",
+                  background: "rgba(255, 255, 255, 0.05)",
+                  borderRadius: "10px",
+                  animation: `fadeInUp 0.6s ease-out ${1.2 + i * 0.1}s both`
+                }}>
+                  <div style={{
+                    color: "#ffffff",
+                    fontSize: "1.2rem",
+                    fontWeight: "bold",
+                    marginBottom: "0.3rem"
+                  }}>{item.value}</div>
+                  <div style={{
+                    color: "rgba(255, 255, 255, 0.7)",
+                    fontSize: "0.8rem"
+                  }}>{item.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

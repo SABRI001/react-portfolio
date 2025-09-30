@@ -29,7 +29,7 @@ const siteProps = {
   email: "sabridokhan2@gmail.com",
   gitHub: "SABRI001",
   instagram: "",
-  linkedIn: "https://www.linkedin.com/in/sabri-nasser-441053196",
+  linkedIn: "sabri-nasser-441053196",
   medium: "",
   twitter: "",
   youTube: "",

@@ -49,15 +49,50 @@ const Footer = (props) => {
         alignItems: "center",
         gap: "2.5rem",
         padding: "5rem 0 3rem",
-        backgroundColor: primaryColor,
-        width: "100vw"
+        background: "linear-gradient(135deg, #0f1419 0%, #1a1f36 50%, #0f1419 100%)",
+        width: "100vw",
+        position: "relative",
+        overflow: "hidden"
       }}
     >
+      {/* Animated Background Elements */}
+      <div style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        zIndex: 1,
+        pointerEvents: "none"
+      }}>
+        {/* Floating geometric shapes */}
+        {[...Array(8)].map((_, i) => (
+          <div
+            key={`bg-shape-${i}`}
+            style={{
+              position: "absolute",
+              width: `${8 + i * 2}px`,
+              height: `${8 + i * 2}px`,
+              background: `rgba(37, 99, 235, ${0.1 - i * 0.01})`,
+              borderRadius: i % 2 === 0 ? "50%" : "0%",
+              top: `${10 + i * 12}%`,
+              left: `${5 + i * 12}%`,
+              animation: `floatingCircle ${4 + i * 0.3}s infinite ease-in-out`,
+              animationDelay: `${i * 0.3}s`,
+              transform: i % 3 === 0 ? "rotate(45deg)" : "rotate(0deg)"
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Social Icons Container */}
       <div
         style={{
           display: "flex",
           justifyContent: "center",
           gap: "2.5rem",
+          position: "relative",
+          zIndex: 2
         }}
       >
         {email && (
@@ -113,7 +148,16 @@ const Footer = (props) => {
           </a>
         )}
       </div>
-      <p className="small" style={{ marginTop: 0, color: "white" }}>
+      
+      {/* Footer Text */}
+      <p className="small" style={{ 
+        marginTop: 0, 
+        color: "rgba(255, 255, 255, 0.9)",
+        textShadow: "0 2px 4px rgba(0,0,0,0.3)",
+        fontWeight: "300",
+        position: "relative",
+        zIndex: 2
+      }}>
         Created by {name}
       </p>
     </div>
