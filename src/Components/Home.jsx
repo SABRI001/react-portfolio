@@ -9,6 +9,9 @@ import React, { useState, useEffect } from "react";
 import arrowSvg from "../images/down-arrow.svg";
 import PropTypes from "prop-types";
 
+console.log('Arrow SVG import:', arrowSvg);
+console.log('Arrow SVG type:', typeof arrowSvg);
+
 /**
  * Home background image
  *
@@ -20,11 +23,20 @@ import PropTypes from "prop-types";
  * Need an image? Check out https://unsplash.com to download a photo you
  * freely use on your site.
  */
-import image from "../images/profile-img.jpg";
+// import image from "../images/profile-img.jpg";
+// const image = require("../images/profile-img.jpg");
+import profileImage from "../images/design-desk.jpeg";
+
+// Use direct path to public directory image
+const imageSrc = "/images/profile-img.jpg";
+
+console.log('Image path:', imageSrc);
+console.log('Profile image import:', profileImage);
+console.log('Profile image type:', typeof profileImage);
 
 const imageAltText = "Professional software developer workspace";
 
-const Home = ({ name, title }) => {
+const Home = ({ name = "", title = "" }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
 
@@ -41,23 +53,24 @@ const Home = ({ name, title }) => {
     return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
 
+  // Example logging
+  console.log('Component rendered');
+  console.log('Image source:', profileImage || imageSrc);
+  console.log('Using imported image:', !!profileImage);
+
   return (
-    <section id="home" className="min-height" style={{ position: "relative", overflow: "hidden" }}>
-      {/* Animated Gradient Background */}
-      <div className="animated-background" style={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
+    <section 
+      id="home" 
+      className="min-h-screen relative overflow-hidden"
+      style={{
         background: `
           linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab),
           radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.1) 0%, transparent 70%)
         `,
         backgroundSize: "400% 400%, 100% 100%",
-        animation: "gradientShift 15s ease infinite",
-        zIndex: 0
-      }} />
+        animation: "gradient-shift 15s ease infinite"
+      }}
+    >
 
       {/* Geometric Shapes Animation */}
       <div style={{
@@ -225,112 +238,61 @@ const Home = ({ name, title }) => {
       </div>
       
       {/* Main content container with glassmorphism */}
-      <div style={{
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        textAlign: "center",
-        zIndex: 10,
-        width: isMobile ? "95%" : "90%",
-        maxWidth: isMobile ? "400px" : isTablet ? "600px" : "800px",
-        background: "rgba(255, 255, 255, 0.1)",
-        backdropFilter: "blur(20px)",
-        borderRadius: isMobile ? "20px" : "30px",
-        border: "1px solid rgba(255, 255, 255, 0.2)",
-        padding: isMobile ? "2rem 1.5rem" : isTablet ? "2.5rem 2rem" : "3rem 2rem",
-        boxShadow: "0 25px 50px rgba(0, 0, 0, 0.1)"
-      }}>
+      <div className={`
+        absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
+        text-center z-50 glassmorphism shadow-2xl
+        ${isMobile ? 'w-[95%] max-w-sm px-6 py-8' : isTablet ? 'w-[90%] max-w-2xl px-8 py-10' : 'w-[90%] max-w-4xl px-8 py-12'}
+      `}>
         {/* Profile image */}
-        <div style={{
-          width: isMobile ? "150px" : isTablet ? "175px" : "200px",
-          height: isMobile ? "150px" : isTablet ? "175px" : "200px",
-          borderRadius: "50%",
-          margin: isMobile ? "0 auto 1.5rem" : "0 auto 2rem",
-          overflow: "hidden",
-          border: "4px solid rgba(255, 255, 255, 0.3)",
-          boxShadow: "0 20px 40px rgba(0,0,0,0.2), 0 0 20px rgba(37, 99, 235, 0.3)",
-          animation: "profileImageFloat 1.5s ease-out",
-          background: "linear-gradient(135deg, #2563EB, #1d4ed8)",
-          position: "relative"
+        <div className={`
+          ${isMobile ? 'w-36 h-36' : isTablet ? 'w-44 h-44' : 'w-52 h-52'}
+          rounded-full mx-auto overflow-hidden border-4 border-white/30
+          shadow-2xl relative gradient-bg-primary
+          ${isMobile ? 'mb-6' : 'mb-8'}
+        `}
+        style={{
+          animation: "profile-float 1.5s ease-out",
+          boxShadow: "0 20px 40px rgba(0,0,0,0.2), 0 0 20px rgba(37, 99, 235, 0.3)"
         }}>
           {/* Animated ring around profile */}
-          <div style={{
-            position: "absolute",
-            top: "-8px",
-            left: "-8px",
-            right: "-8px",
-            bottom: "-8px",
-            borderRadius: "50%",
-            border: "3px solid transparent",
-            background: "linear-gradient(45deg, rgba(37, 99, 235, 0.8), rgba(29, 78, 216, 0.8), rgba(37, 99, 235, 0.8))",
-            backgroundClip: "padding-box",
-            animation: "rotateRing 4s linear infinite",
-            opacity: "1"
-          }} />
+          <div className="absolute -top-2 -left-2 -right-2 -bottom-2 rounded-full border-2 border-transparent bg-gradient-to-r from-blue-500 to-blue-700 bg-clip-padding opacity-100"
+            style={{
+              animation: "rotate-ring 4s linear infinite"
+            }} />
           
           <img 
-            src={image}
+            src={profileImage || imageSrc}
             alt="Profile"
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              transition: "transform 0.3s ease",
-              position: "relative",
-              zIndex: 1
-            }}
-            onMouseEnter={(e) => {
-              e.target.style.transform = "scale(1.1)";
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.transform = "scale(1)";
-            }}
+            className="w-full h-full object-cover transition-transform duration-300 relative z-10 hover:scale-110"
           />
         </div>
 
         {/* Name and title */}
-        <div style={{
-          animation: "slideInUp 1s ease-out 0.3s both"
-        }}>
-          <h1 style={{
-            background: "linear-gradient(135deg, #ffffff, #e0f2fe)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-            fontSize: isMobile ? "2.5rem" : isTablet ? "3rem" : "4rem",
-            fontWeight: "bold",
-            margin: "0 0 1rem 0",
-            textShadow: "0 4px 8px rgba(0,0,0,0.3)",
-            animation: "textGlow 2s ease-in-out infinite alternate",
+        <div style={{ animation: "slide-in-up 1s ease-out 0.3s both" }}>
+          <h1 className={`
+            gradient-text font-bold m-0 mb-4 text-shadow-lg
+            ${isMobile ? 'text-4xl' : isTablet ? 'text-5xl' : 'text-6xl'}
+          `}
+          style={{
+            animation: "text-glow 2s ease-in-out infinite alternate",
             filter: "drop-shadow(0 0 10px rgba(255,255,255,0.5))"
-          }}>{name}</h1>
+          }}>
+            {name}
+          </h1>
           
-          <h2 style={{
-            color: "rgba(255, 255, 255, 0.9)",
-            fontSize: isMobile ? "1.2rem" : isTablet ? "1.5rem" : "1.8rem",
-            fontWeight: "300",
-            margin: isMobile ? "0 0 1.5rem 0" : "0 0 2rem 0",
-            textShadow: "2px 2px 8px rgba(0,0,0,0.3)",
-            animation: "fadeInUp 1.2s ease-out 0.6s both",
-            lineHeight: "1.4"
-          }}>{title}</h2>
+          <h2 className={`
+            text-white/90 font-light text-shadow leading-snug
+            ${isMobile ? 'text-lg mb-6' : isTablet ? 'text-xl mb-8' : 'text-2xl mb-8'}
+          `}
+          style={{ animation: "fade-in-up 1.2s ease-out 0.6s both" }}>
+            {title}
+          </h2>
           
           {/* Call to action button */}
-          <button style={{
-            background: "linear-gradient(135deg, rgba(37, 99, 235, 0.8), rgba(29, 78, 216, 0.8))",
-            color: "white",
-            border: "2px solid rgba(255, 255, 255, 0.3)",
-            padding: isMobile ? "0.8rem 1.5rem" : "1rem 2rem",
-            borderRadius: "50px",
-            fontSize: isMobile ? "1rem" : "1.1rem",
-            fontWeight: "600",
-            cursor: "pointer",
-            backdropFilter: "blur(10px)",
-            boxShadow: "0 10px 30px rgba(37, 99, 235, 0.3)",
-            animation: "fadeInUp 1.2s ease-out 0.9s both",
-            transition: "all 0.3s ease"
-          }}
+          <button className={`
+            btn-primary ${isMobile ? 'px-6 py-3 text-base' : 'px-8 py-4 text-lg'}
+          `}
+          style={{ animation: "fade-in-up 1.2s ease-out 0.9s both" }}
           onClick={() => document.getElementById('portfolio').scrollIntoView({ behavior: 'smooth' })}
           onMouseEnter={(e) => {
             e.target.style.transform = "translateY(-3px)";
@@ -347,24 +309,15 @@ const Home = ({ name, title }) => {
       </div>
 
       {/* Animated scroll indicator */}
-      <div style={{ 
-        position: "absolute", 
-        bottom: "2rem", 
-        left: "50%",
-        transform: "translateX(-50%)",
-        zIndex: 2,
-        animation: "bounceUpDown 2s infinite",
-        cursor: "pointer"
-      }}
-      onClick={() => document.getElementById('about').scrollIntoView({ behavior: 'smooth' })}
+      <div 
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 cursor-pointer"
+        style={{ animation: "bounce-up-down 2s infinite" }}
+        onClick={() => document.getElementById('about').scrollIntoView({ behavior: 'smooth' })}
       >
         <img 
           src={arrowSvg} 
-          style={{ 
-            height: "3rem", 
-            width: "3rem",
-            filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.3)) invert(1)"
-          }} 
+          className="h-12 w-12"
+          style={{ filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.3)) invert(1)" }}
           alt="Scroll down arrow" 
         />
       </div>
@@ -372,14 +325,9 @@ const Home = ({ name, title }) => {
   );
 };
 
-Home.defaultProps = {
-  name: "",
-  title: "",
-};
-
 Home.propTypes = {
-  name: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
+  name: PropTypes.string,
+  title: PropTypes.string,
 };
 
 export default Home;

@@ -110,120 +110,57 @@ const Contact = () => {
   };
 
   return (
-    <section className="padding" id="contact" style={{
-      background: "linear-gradient(135deg, #0f1419 0%, #1a1f36 50%, #0f1419 100%)",
-      position: "relative",
-      overflow: "hidden",
-      minHeight: "100vh"
-    }}>
+    <section className="min-h-screen relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" id="contact">
       {/* Animated Background Elements */}
-      <div style={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-        zIndex: 1,
-        pointerEvents: "none"
-      }}>
+      <div className="absolute inset-0 z-10 pointer-events-none">
         {/* Floating geometric shapes */}
         {[...Array(10)].map((_, i) => (
           <div
             key={`bg-shape-${i}`}
+            className={`absolute ${i % 2 === 0 ? 'rounded-full' : 'rounded-none'} ${i % 3 === 0 ? 'rotate-45' : 'rotate-0'}`}
             style={{
-              position: "absolute",
               width: `${8 + i * 3}px`,
               height: `${8 + i * 3}px`,
               background: `rgba(37, 99, 235, ${0.1 - i * 0.005})`,
-              borderRadius: i % 2 === 0 ? "50%" : "0%",
               top: `${5 + i * 10}%`,
               left: `${3 + i * 10}%`,
-              animation: `floatingCircle ${4 + i * 0.3}s infinite ease-in-out`,
+              animation: `floating-circle ${4 + i * 0.3}s infinite ease-in-out`,
               animationDelay: `${i * 0.2}s`,
-              transform: i % 3 === 0 ? "rotate(45deg)" : "rotate(0deg)"
             }}
           />
         ))}
       </div>
 
       {/* Section Header */}
-      <div style={{
-        textAlign: "center",
-        marginBottom: "4rem",
-        position: "relative",
-        zIndex: 2
-      }}>
-        <h2 style={{
-          background: "linear-gradient(135deg, #ffffff, #e0f2fe)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          backgroundClip: "text",
-          fontSize: "3rem",
-          fontWeight: "bold",
-          margin: "0 0 1rem 0",
-          textShadow: "0 4px 8px rgba(0,0,0,0.3)",
-          animation: "fadeInUp 0.8s ease-out",
-          filter: "drop-shadow(0 0 10px rgba(255,255,255,0.3))"
-        }}>Get In Touch</h2>
+      <div className="text-center mb-16 relative z-20">
+        <h2 className="bg-gradient-to-br from-white to-cyan-100 bg-clip-text text-transparent text-5xl font-bold text-center mb-4"
+          style={{ 
+            textShadow: "0 4px 8px rgba(0,0,0,0.3)",
+            animation: "fade-in-up 0.8s ease-out",
+            filter: "drop-shadow(0 0 10px rgba(255,255,255,0.3))"
+          }}>
+          Get In Touch
+        </h2>
         
-        <div style={{
-          width: "120px",
-          height: "4px",
-          background: "linear-gradient(135deg, #ffffff, #e0f2fe)",
-          margin: "0 auto",
-          borderRadius: "2px",
-          animation: "slideInLeft 0.8s ease-out 0.3s both"
-        }} />
+        <div className="w-30 h-1 bg-gradient-to-r from-white to-cyan-100 mx-auto rounded"
+          style={{ animation: "slide-in-left 0.8s ease-out 0.3s both" }} />
 
-        <p style={{
-          color: "rgba(255, 255, 255, 0.8)",
-          fontSize: "1.2rem",
-          marginTop: "2rem",
-          maxWidth: "600px",
-          margin: "2rem auto 0",
-          lineHeight: "1.6",
-          animation: "fadeInUp 0.8s ease-out 0.5s both"
-        }}>
+        <p className="text-white/80 text-xl mt-8 max-w-2xl mx-auto leading-relaxed"
+          style={{ animation: "fade-in-up 0.8s ease-out 0.5s both" }}>
           Have a project in mind or want to collaborate? I'd love to hear from you!
           Send me a message and I'll get back to you as soon as possible.
         </p>
       </div>
 
       {/* Contact Form Container */}
-      <div style={{
-        maxWidth: "800px",
-        margin: "0 auto",
-        padding: "0 2rem",
-        position: "relative",
-        zIndex: 2
-      }}>
-        <div style={{
-          background: "rgba(255, 255, 255, 0.1)",
-          backdropFilter: "blur(20px)",
-          borderRadius: "25px",
-          border: "1px solid rgba(255, 255, 255, 0.2)",
-          padding: "3rem",
-          boxShadow: "0 25px 50px rgba(0, 0, 0, 0.1)",
-          animation: "fadeInUp 0.8s ease-out 0.7s both"
-        }}>
+      <div className="max-w-4xl mx-auto px-8 relative z-20">
+        <div className="glass-morphism p-12 rounded-3xl"
+          style={{ animation: "fade-in-up 0.8s ease-out 0.7s both" }}>
           <form onSubmit={handleSubmit}>
             {/* Name and Email Row */}
-            <div style={{
-              display: "grid",
-              gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
-              gap: isMobile ? "1.5rem" : "2.5rem",
-              marginBottom: "2rem"
-            }}>
-              <div style={{
-                paddingRight: isMobile ? "0" : "0.5rem"
-              }}>
-                <label style={{
-                  display: "block",
-                  color: "rgba(255, 255, 255, 0.9)",
-                  fontSize: "1rem",
-                  fontWeight: "500",
-                  marginBottom: "0.5rem"
-                }}>
+            <div className={`grid mb-8 ${isMobile ? 'grid-cols-1 gap-6' : 'grid-cols-2 gap-10'}`}>
+              <div className={isMobile ? '' : 'pr-2'}>
+                <label className="block text-white/90 text-base font-medium mb-2">
                   Name *
                 </label>
                 <input
@@ -232,40 +169,13 @@ const Contact = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  style={{
-                    width: "100%",
-                    padding: "1rem",
-                    borderRadius: "15px",
-                    border: "1px solid rgba(255, 255, 255, 0.2)",
-                    background: "rgba(255, 255, 255, 0.1)",
-                    color: "white",
-                    fontSize: "1rem",
-                    backdropFilter: "blur(10px)",
-                    transition: "all 0.3s ease",
-                    outline: "none"
-                  }}
-                  onFocus={(e) => {
-                    e.target.style.borderColor = "rgba(37, 99, 235, 0.5)";
-                    e.target.style.boxShadow = "0 0 20px rgba(37, 99, 235, 0.2)";
-                  }}
-                  onBlur={(e) => {
-                    e.target.style.borderColor = "rgba(255, 255, 255, 0.2)";
-                    e.target.style.boxShadow = "none";
-                  }}
+                  className="w-full p-4 rounded-2xl border border-white/20 bg-white/10 text-white text-base backdrop-blur-sm transition-all duration-300 outline-none focus:border-blue-500/50 focus:shadow-blue-500/20 focus:shadow-lg"
                   placeholder="Your Name"
                 />
               </div>
 
-              <div style={{
-                paddingLeft: isMobile ? "0" : "0.5rem"
-              }}>
-                <label style={{
-                  display: "block",
-                  color: "rgba(255, 255, 255, 0.9)",
-                  fontSize: "1rem",
-                  fontWeight: "500",
-                  marginBottom: "0.5rem"
-                }}>
+              <div className={isMobile ? '' : 'pl-2'}>
+                <label className="block text-white/90 text-base font-medium mb-2">
                   Email *
                 </label>
                 <input
@@ -274,40 +184,15 @@ const Contact = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  style={{
-                    width: "100%",
-                    padding: "1rem",
-                    borderRadius: "15px",
-                    border: "1px solid rgba(255, 255, 255, 0.2)",
-                    background: "rgba(255, 255, 255, 0.1)",
-                    color: "white",
-                    fontSize: "1rem",
-                    backdropFilter: "blur(10px)",
-                    transition: "all 0.3s ease",
-                    outline: "none"
-                  }}
-                  onFocus={(e) => {
-                    e.target.style.borderColor = "rgba(37, 99, 235, 0.5)";
-                    e.target.style.boxShadow = "0 0 20px rgba(37, 99, 235, 0.2)";
-                  }}
-                  onBlur={(e) => {
-                    e.target.style.borderColor = "rgba(255, 255, 255, 0.2)";
-                    e.target.style.boxShadow = "none";
-                  }}
+                  className="w-full p-4 rounded-2xl border border-white/20 bg-white/10 text-white text-base backdrop-blur-sm transition-all duration-300 outline-none focus:border-blue-500/50 focus:shadow-blue-500/20 focus:shadow-lg"
                   placeholder="your.email@example.com"
                 />
               </div>
             </div>
 
             {/* Subject Field */}
-            <div style={{ marginBottom: "2rem" }}>
-              <label style={{
-                display: "block",
-                color: "rgba(255, 255, 255, 0.9)",
-                fontSize: "1rem",
-                fontWeight: "500",
-                marginBottom: "0.5rem"
-              }}>
+            <div className="mb-8">
+              <label className="block text-white/90 text-base font-medium mb-2">
                 Subject *
               </label>
               <input
@@ -316,39 +201,14 @@ const Contact = () => {
                 value={formData.subject}
                 onChange={handleChange}
                 required
-                style={{
-                  width: "100%",
-                  padding: "1rem",
-                  borderRadius: "15px",
-                  border: "1px solid rgba(255, 255, 255, 0.2)",
-                  background: "rgba(255, 255, 255, 0.1)",
-                  color: "white",
-                  fontSize: "1rem",
-                  backdropFilter: "blur(10px)",
-                  transition: "all 0.3s ease",
-                  outline: "none"
-                }}
-                onFocus={(e) => {
-                  e.target.style.borderColor = "rgba(37, 99, 235, 0.5)";
-                  e.target.style.boxShadow = "0 0 20px rgba(37, 99, 235, 0.2)";
-                }}
-                onBlur={(e) => {
-                  e.target.style.borderColor = "rgba(255, 255, 255, 0.2)";
-                  e.target.style.boxShadow = "none";
-                }}
+                className="w-full p-4 rounded-2xl border border-white/20 bg-white/10 text-white text-base backdrop-blur-sm transition-all duration-300 outline-none focus:border-blue-500/50 focus:shadow-blue-500/20 focus:shadow-lg"
                 placeholder="Project Inquiry / Collaboration / General Question"
               />
             </div>
 
             {/* Message Field */}
-            <div style={{ marginBottom: "2rem" }}>
-              <label style={{
-                display: "block",
-                color: "rgba(255, 255, 255, 0.9)",
-                fontSize: "1rem",
-                fontWeight: "500",
-                marginBottom: "0.5rem"
-              }}>
+            <div className="mb-8">
+              <label className="block text-white/90 text-base font-medium mb-2">
                 Message *
               </label>
               <textarea
@@ -357,104 +217,41 @@ const Contact = () => {
                 onChange={handleChange}
                 required
                 rows="6"
-                style={{
-                  width: "100%",
-                  padding: "1rem",
-                  borderRadius: "15px",
-                  border: "1px solid rgba(255, 255, 255, 0.2)",
-                  background: "rgba(255, 255, 255, 0.1)",
-                  color: "white",
-                  fontSize: "1rem",
-                  backdropFilter: "blur(10px)",
-                  transition: "all 0.3s ease",
-                  outline: "none",
-                  resize: "vertical",
-                  minHeight: "120px"
-                }}
-                onFocus={(e) => {
-                  e.target.style.borderColor = "rgba(37, 99, 235, 0.5)";
-                  e.target.style.boxShadow = "0 0 20px rgba(37, 99, 235, 0.2)";
-                }}
-                onBlur={(e) => {
-                  e.target.style.borderColor = "rgba(255, 255, 255, 0.2)";
-                  e.target.style.boxShadow = "none";
-                }}
+                className="w-full p-4 rounded-2xl border border-white/20 bg-white/10 text-white text-base backdrop-blur-sm transition-all duration-300 outline-none resize-y min-h-[120px] focus:border-blue-500/50 focus:shadow-blue-500/20 focus:shadow-lg"
                 placeholder="Tell me about your project, ideas, or just say hello..."
               />
             </div>
 
             {/* Submit Button */}
-            <div style={{ textAlign: "center" }}>
+            <div className="text-center">
               <button
                 type="submit"
                 disabled={isSubmitting}
-                style={{
-                  background: isSubmitting 
-                    ? "rgba(107, 114, 128, 0.8)" 
-                    : "linear-gradient(135deg, rgba(37, 99, 235, 0.8), rgba(29, 78, 216, 0.8))",
-                  color: "white",
-                  border: "2px solid rgba(255, 255, 255, 0.3)",
-                  padding: "1.2rem 3rem",
-                  borderRadius: "50px",
-                  fontSize: "1.1rem",
-                  fontWeight: "600",
-                  cursor: isSubmitting ? "not-allowed" : "pointer",
-                  backdropFilter: "blur(10px)",
-                  boxShadow: "0 10px 30px rgba(37, 99, 235, 0.3)",
-                  transition: "all 0.3s ease",
-                  outline: "none",
-                  minWidth: "200px"
-                }}
-                onMouseEnter={(e) => {
-                  if (!isSubmitting) {
-                    e.target.style.transform = "translateY(-3px)";
-                    e.target.style.boxShadow = "0 15px 40px rgba(37, 99, 235, 0.4)";
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (!isSubmitting) {
-                    e.target.style.transform = "translateY(0)";
-                    e.target.style.boxShadow = "0 10px 30px rgba(37, 99, 235, 0.3)";
-                  }
-                }}
+                className={`text-white border-2 border-white/30 px-12 py-5 rounded-full text-lg font-semibold backdrop-blur-sm transition-all duration-300 outline-none min-w-[200px] ${
+                  isSubmitting 
+                    ? 'bg-gray-500/80 cursor-not-allowed' 
+                    : 'bg-gradient-to-br from-blue-600/80 to-blue-700/80 cursor-pointer hover:transform hover:-translate-y-1 hover:shadow-blue-500/40 hover:shadow-2xl'
+                }`}
+                style={{ boxShadow: "0 10px 30px rgba(37, 99, 235, 0.3)" }}
               >
                 {isSubmitting ? "Sending..." : "Send Message"}
               </button>
 
               {/* Status Messages */}
               {submitStatus === "success" && (
-                <p style={{
-                  marginTop: "1rem",
-                  color: "#10b981",
-                  fontSize: "1rem",
-                  fontWeight: "500"
-                }}>
+                <p className="mt-4 text-emerald-400 text-base font-medium">
                   ✓ Message sent successfully! I'll get back to you soon.
                 </p>
               )}
 
               {submitStatus === "config_error" && (
-                <p style={{
-                  marginTop: "1rem",
-                  color: "#f59e0b",
-                  fontSize: "1rem",
-                  fontWeight: "500",
-                  padding: "0.75rem",
-                  background: "rgba(245, 158, 11, 0.1)",
-                  borderRadius: "0.5rem",
-                  border: "1px solid rgba(245, 158, 11, 0.3)"
-                }}>
+                <p className="mt-4 text-amber-400 text-base font-medium p-3 bg-amber-400/10 rounded-lg border border-amber-400/30">
                   ⚠️ EmailJS configuration needed. Check console for details or use the mailto link that just opened.
                 </p>
               )}
 
               {submitStatus === "error" && (
-                <p style={{
-                  marginTop: "1rem",
-                  color: "#ef4444",
-                  fontSize: "1rem",
-                  fontWeight: "500"
-                }}>
+                <p className="mt-4 text-red-400 text-base font-medium">
                   ✗ Failed to send message. Please try again or email me directly.
                 </p>
               )}
@@ -462,34 +259,13 @@ const Contact = () => {
           </form>
 
           {/* Alternative Contact Info */}
-          <div style={{
-            marginTop: "3rem",
-            paddingTop: "2rem",
-            borderTop: "1px solid rgba(255, 255, 255, 0.1)",
-            textAlign: "center"
-          }}>
-            <p style={{
-              color: "rgba(255, 255, 255, 0.7)",
-              fontSize: "0.95rem",
-              marginBottom: "1rem"
-            }}>
+          <div className="mt-12 pt-8 border-t border-white/10 text-center">
+            <p className="text-white/70 text-base mb-4">
               Prefer direct contact?
             </p>
             <a 
               href="mailto:sabridokhan2@gmail.com"
-              style={{
-                color: "#2563EB",
-                fontSize: "1.1rem",
-                fontWeight: "600",
-                textDecoration: "none",
-                transition: "color 0.3s ease"
-              }}
-              onMouseEnter={(e) => {
-                e.target.style.color = "#1d4ed8";
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.color = "#2563EB";
-              }}
+              className="text-blue-600 text-lg font-semibold no-underline transition-colors duration-300 hover:text-blue-700"
             >
               sabridokhan2@gmail.com
             </a>

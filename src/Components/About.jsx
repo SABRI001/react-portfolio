@@ -71,150 +71,71 @@ const About = () => {
   }, []);
 
   return (
-    <section className="padding" id="about" style={{
-      background: "linear-gradient(135deg, #0f1419 0%, #1a1f36 50%, #0f1419 100%)",
-      position: "relative",
-      overflow: "hidden",
-      minHeight: "100vh"
-    }}>
+    <section className="min-h-screen relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" id="about">
       {/* Animated Background Elements */}
-      <div style={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-        zIndex: 1,
-        pointerEvents: "none"
-      }}>
+      <div className="absolute inset-0 z-10 pointer-events-none">
         {/* Floating geometric shapes */}
         {[...Array(12)].map((_, i) => (
           <div
             key={`bg-shape-${i}`}
+            className={`absolute ${i % 2 === 0 ? 'rounded-full' : 'rounded-none'} ${i % 3 === 0 ? 'rotate-45' : 'rotate-0'}`}
             style={{
-              position: "absolute",
               width: `${8 + i * 3}px`,
               height: `${8 + i * 3}px`,
               background: `rgba(37, 99, 235, ${0.1 - i * 0.005})`,
-              borderRadius: i % 2 === 0 ? "50%" : "0%",
               top: `${5 + i * 8}%`,
               left: `${3 + i * 8}%`,
-              animation: `floatingCircle ${4 + i * 0.3}s infinite ease-in-out`,
+              animation: `floating-circle ${4 + i * 0.3}s infinite ease-in-out`,
               animationDelay: `${i * 0.2}s`,
-              transform: i % 3 === 0 ? "rotate(45deg)" : "rotate(0deg)"
             }}
           />
         ))}
       </div>
 
       {/* Section Header */}
-      <div style={{
-        textAlign: "center",
-        marginBottom: isMobile ? "2rem" : "3rem",
-        position: "relative",
-        zIndex: 2,
-        padding: isMobile ? "0 1rem" : "0"
-      }}>
-        <h2 style={{
-          background: "linear-gradient(135deg, #ffffff, #e0f2fe)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          backgroundClip: "text",
-          fontSize: isMobile ? "2rem" : isTablet ? "2.5rem" : "3rem",
-          fontWeight: "bold",
-          margin: "0 0 1rem 0",
-          textShadow: "0 4px 8px rgba(0,0,0,0.3)",
-          animation: "fadeInUp 0.8s ease-out",
-          filter: "drop-shadow(0 0 10px rgba(255,255,255,0.3))"
-        }}>About Myself</h2>
+      <div className={`text-center relative z-20 ${isMobile ? 'mb-8 px-4' : 'mb-12'}`}>
+        <h2 className={`bg-gradient-to-br from-white to-cyan-100 bg-clip-text text-transparent font-bold text-center mb-4 ${isMobile ? 'text-3xl' : isTablet ? 'text-4xl' : 'text-5xl'}`}
+          style={{ 
+            textShadow: "0 4px 8px rgba(0,0,0,0.3)",
+            animation: "fade-in-up 0.8s ease-out",
+            filter: "drop-shadow(0 0 10px rgba(255,255,255,0.3))"
+          }}>
+          About Myself
+        </h2>
         
-        <div style={{
-          width: "120px",
-          height: "4px",
-          background: "linear-gradient(135deg, #ffffff, #e0f2fe)",
-          margin: "0 auto",
-          borderRadius: "2px",
-          animation: "slideInLeft 0.8s ease-out 0.3s both"
-        }} />
+        <div className="w-30 h-1 bg-gradient-to-r from-white to-cyan-100 mx-auto rounded"
+          style={{ animation: "slide-in-left 0.8s ease-out 0.3s both" }} />
       </div>
 
       {/* Main Content Container */}
-      <div style={{
-        maxWidth: "1200px",
-        margin: "0 auto",
-        padding: isMobile ? "0 1rem" : isTablet ? "0 1.5rem" : "0 2rem",
-        position: "relative",
-        zIndex: 2
-      }}>
+      <div className={`max-w-6xl mx-auto relative z-20 ${isMobile ? 'px-4' : isTablet ? 'px-6' : 'px-8'}`}>
         
         {/* Top Section - Description */}
-        <div style={{
-          background: "rgba(255, 255, 255, 0.1)",
-          backdropFilter: "blur(20px)",
-          borderRadius: isMobile ? "20px" : "25px",
-          border: "1px solid rgba(255, 255, 255, 0.2)",
-          padding: isMobile ? "2rem 1.5rem" : isTablet ? "2.5rem" : "3rem",
-          marginBottom: isMobile ? "2rem" : "3rem",
-          boxShadow: "0 25px 50px rgba(0, 0, 0, 0.1)",
-          animation: "fadeInUp 0.8s ease-out 0.5s both",
-          textAlign: "center"
-        }}>
-          <p style={{
-            color: "rgba(255, 255, 255, 0.9)",
-            fontSize: isMobile ? "1.1rem" : isTablet ? "1.2rem" : "1.3rem",
-            lineHeight: "1.8",
-            margin: "0",
-            fontWeight: "300",
-            textShadow: "0 2px 4px rgba(0,0,0,0.3)"
-          }}>{description}</p>
+        <div className={`glass-morphism text-center ${isMobile ? 'p-6 mb-8 rounded-2xl' : isTablet ? 'p-10 mb-12 rounded-3xl' : 'p-12 mb-12 rounded-3xl'}`}
+          style={{ animation: "fade-in-up 0.8s ease-out 0.5s both" }}>
+          <p className={`text-white/90 leading-relaxed font-light ${isMobile ? 'text-lg' : isTablet ? 'text-xl' : 'text-xl'}`}
+            style={{ textShadow: "0 2px 4px rgba(0,0,0,0.3)" }}>
+            {description}
+          </p>
         </div>
 
         {/* Skills and Quote Section */}
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
-          gap: isMobile ? "2rem" : "3rem",
-          alignItems: "start"
-        }}>
+        <div className={`grid items-start ${isMobile ? 'grid-cols-1 gap-8' : 'grid-cols-2 gap-12'}`}>
           
           {/* Skills Section */}
-          <div style={{
-            background: "rgba(255, 255, 255, 0.1)",
-            backdropFilter: "blur(20px)",
-            borderRadius: isMobile ? "20px" : "25px",
-            border: "1px solid rgba(255, 255, 255, 0.2)",
-            padding: isMobile ? "2rem 1.5rem" : isTablet ? "2.5rem" : "3rem",
-            boxShadow: "0 25px 50px rgba(0, 0, 0, 0.1)",
-            animation: "slideInLeft 0.8s ease-out 0.7s both"
-          }}>
-            <h3 style={{
-              color: "#ffffff",
-              fontSize: isMobile ? "1.5rem" : isTablet ? "1.7rem" : "1.8rem",
-              fontWeight: "600",
-              marginBottom: isMobile ? "1.5rem" : "2rem",
-              textAlign: "center",
-              textShadow: "0 2px 4px rgba(0,0,0,0.3)"
-            }}>Technical Skills</h3>
+          <div className={`glass-morphism ${isMobile ? 'p-6 rounded-2xl' : isTablet ? 'p-10 rounded-3xl' : 'p-12 rounded-3xl'}`}
+            style={{ animation: "slide-in-left 0.8s ease-out 0.7s both" }}>
+            <h3 className={`text-white font-semibold text-center mb-6 ${isMobile ? 'text-2xl' : isTablet ? 'text-3xl' : 'text-3xl'}`}
+              style={{ textShadow: "0 2px 4px rgba(0,0,0,0.3)" }}>
+              Technical Skills
+            </h3>
 
-            <div style={{
-              display: "grid",
-              gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
-              gap: isMobile ? "0.8rem" : "1rem"
-            }}>
+            <div className={`grid gap-4 ${isMobile ? 'grid-cols-1' : 'grid-cols-2'}`}>
               {skillsList.map((skill, index) => (
                 <div
                   key={skill}
-                  style={{
-                    background: "rgba(255, 255, 255, 0.1)",
-                    borderRadius: isMobile ? "12px" : "15px",
-                    padding: isMobile ? "0.8rem" : "1rem",
-                    border: "1px solid rgba(255, 255, 255, 0.1)",
-                    transition: "all 0.3s ease",
-                    cursor: "pointer",
-                    animation: `fadeInUp 0.6s ease-out ${0.9 + index * 0.1}s both`,
-                    position: "relative",
-                    overflow: "hidden"
-                  }}
+                  className={`bg-white/10 border border-white/10 relative overflow-hidden cursor-pointer transition-all duration-300 ${isMobile ? 'p-3 rounded-xl' : 'p-4 rounded-2xl'}`}
+                  style={{ animation: `fade-in-up 0.6s ease-out ${0.9 + index * 0.1}s both` }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.background = "rgba(37, 99, 235, 0.2)";
                     e.currentTarget.style.borderColor = "rgba(37, 99, 235, 0.4)";
@@ -229,96 +150,54 @@ const About = () => {
                   }}
                 >
                   {/* Skill icon */}
-                  <div style={{
-                    width: "8px",
-                    height: "8px",
-                    background: "linear-gradient(135deg, #ffffff, #e0f2fe)",
-                    borderRadius: "50%",
-                    marginBottom: "0.5rem",
-                    boxShadow: "0 0 10px rgba(255,255,255,0.5)"
-                  }} />
+                  <div className="w-2 h-2 bg-gradient-to-br from-white to-cyan-100 rounded-full mb-2"
+                    style={{ boxShadow: "0 0 10px rgba(255,255,255,0.5)" }} />
                   
-                  <div style={{
-                    color: "rgba(255, 255, 255, 0.9)",
-                    fontSize: isMobile ? "0.9rem" : "0.95rem",
-                    fontWeight: "500",
-                    textShadow: "0 1px 2px rgba(0,0,0,0.3)"
-                  }}>{skill}</div>
+                  <div className={`text-white/90 font-medium ${isMobile ? 'text-sm' : 'text-base'}`}
+                    style={{ textShadow: "0 1px 2px rgba(0,0,0,0.3)" }}>
+                    {skill}
+                  </div>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Quote/Detail Section */}
-          <div style={{
-            background: "rgba(255, 255, 255, 0.1)",
-            backdropFilter: "blur(20px)",
-            borderRadius: isMobile ? "20px" : "25px",
-            border: "1px solid rgba(255, 255, 255, 0.2)",
-            padding: isMobile ? "2rem 1.5rem" : isTablet ? "2.5rem" : "3rem",
-            boxShadow: "0 25px 50px rgba(0, 0, 0, 0.1)",
-            animation: "slideInRight 0.8s ease-out 0.7s both",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            position: "relative"
-          }}>
+          <div className={`glass-morphism flex flex-col justify-center relative ${isMobile ? 'p-6 rounded-2xl' : isTablet ? 'p-10 rounded-3xl' : 'p-12 rounded-3xl'}`}
+            style={{ animation: "slide-in-right 0.8s ease-out 0.7s both" }}>
             {/* Quote icon */}
-            <div style={{
-              fontSize: isMobile ? "3rem" : "4rem",
-              color: "rgba(255, 255, 255, 0.2)",
-              fontFamily: "Georgia, serif",
-              lineHeight: "1",
-              marginBottom: "1rem"
-            }}>"</div>
+            <div className={`text-white/20 leading-none mb-4 ${isMobile ? 'text-5xl' : 'text-6xl'}`}
+              style={{ fontFamily: "Georgia, serif" }}>
+              "
+            </div>
 
-            <h3 style={{
-              color: "#ffffff",
-              fontSize: isMobile ? "1.5rem" : isTablet ? "1.7rem" : "1.8rem",
-              fontWeight: "600",
-              marginBottom: "1.5rem",
-              textShadow: "0 2px 4px rgba(0,0,0,0.3)"
-            }}>My Philosophy</h3>
+            <h3 className={`text-white font-semibold mb-6 ${isMobile ? 'text-2xl' : isTablet ? 'text-3xl' : 'text-3xl'}`}
+              style={{ textShadow: "0 2px 4px rgba(0,0,0,0.3)" }}>
+              My Philosophy
+            </h3>
 
-            <p style={{
-              color: "rgba(255, 255, 255, 0.9)",
-              fontSize: isMobile ? "1rem" : "1.1rem",
-              lineHeight: "1.7",
-              margin: "0",
-              fontStyle: "italic",
-              textShadow: "0 1px 2px rgba(0,0,0,0.3)"
-            }}>{detailOrQuote}</p>
+            <p className={`text-white/90 leading-relaxed italic ${isMobile ? 'text-base' : 'text-lg'}`}
+              style={{ textShadow: "0 1px 2px rgba(0,0,0,0.3)" }}>
+              {detailOrQuote}
+            </p>
 
             {/* Professional highlights */}
-            <div style={{
-              marginTop: "2rem",
-              display: "grid",
-              gridTemplateColumns: isMobile ? "1fr 1fr" : "1fr 1fr",
-              gap: isMobile ? "0.8rem" : "1rem"
-            }}>
+            <div className={`mt-8 grid gap-3 ${isMobile ? 'grid-cols-2' : 'grid-cols-2'}`}>
               {[
                 { label: "Years Experience", value: "2+" },
                 { label: "Location", value: "Malaysia" },
                 { label: "Focus", value: "Full-Stack" },
                 { label: "Approach", value: "Scalable" }
               ].map((item, i) => (
-                <div key={item.label} style={{
-                  textAlign: "center",
-                  padding: isMobile ? "0.8rem" : "1rem",
-                  background: "rgba(255, 255, 255, 0.05)",
-                  borderRadius: "10px",
-                  animation: `fadeInUp 0.6s ease-out ${1.2 + i * 0.1}s both`
-                }}>
-                  <div style={{
-                    color: "#ffffff",
-                    fontSize: isMobile ? "1rem" : "1.2rem",
-                    fontWeight: "bold",
-                    marginBottom: "0.3rem"
-                  }}>{item.value}</div>
-                  <div style={{
-                    color: "rgba(255, 255, 255, 0.7)",
-                    fontSize: isMobile ? "0.7rem" : "0.8rem"
-                  }}>{item.label}</div>
+                <div key={item.label} 
+                  className={`text-center bg-white/5 rounded-lg ${isMobile ? 'p-3' : 'p-4'}`}
+                  style={{ animation: `fade-in-up 0.6s ease-out ${1.2 + i * 0.1}s both` }}>
+                  <div className={`text-white font-bold mb-1 ${isMobile ? 'text-base' : 'text-xl'}`}>
+                    {item.value}
+                  </div>
+                  <div className={`text-white/70 ${isMobile ? 'text-xs' : 'text-sm'}`}>
+                    {item.label}
+                  </div>
                 </div>
               ))}
             </div>

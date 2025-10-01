@@ -22,61 +22,25 @@ const Header = () => {
   }, []);
 
   return (
-    <div
-      style={{
-        position: "fixed",
-        display: "flex",
-        justifyContent: "center",
-        gap: isMobile ? "1rem" : "2rem",
-        background: "rgba(255,255,255,0.75)",
-        padding: isMobile ? "0.8rem 1rem" : "1rem",
-        top: 0,
-        width: "100%",
-        zIndex: 10,
-        backdropFilter: "blur(10px)",
-        borderBottom: "1px solid rgba(255,255,255,0.2)"
-      }}
-    >
-      <a href="#home" style={{
-        textDecoration: "none",
-        color: "#333",
-        fontWeight: "500",
-        fontSize: isMobile ? "0.9rem" : "1rem",
-        padding: isMobile ? "0.5rem 0.8rem" : "0.5rem 1rem",
-        borderRadius: "8px",
-        transition: "all 0.3s ease",
-        background: "rgba(255,255,255,0.1)"
-      }}>Home</a>
-      <a href="#about" style={{
-        textDecoration: "none",
-        color: "#333",
-        fontWeight: "500",
-        fontSize: isMobile ? "0.9rem" : "1rem",
-        padding: isMobile ? "0.5rem 0.8rem" : "0.5rem 1rem",
-        borderRadius: "8px",
-        transition: "all 0.3s ease",
-        background: "rgba(255,255,255,0.1)"
-      }}>About</a>
-      <a href="#portfolio" style={{
-        textDecoration: "none",
-        color: "#333",
-        fontWeight: "500",
-        fontSize: isMobile ? "0.9rem" : "1rem",
-        padding: isMobile ? "0.5rem 0.8rem" : "0.5rem 1rem",
-        borderRadius: "8px",
-        transition: "all 0.3s ease",
-        background: "rgba(255,255,255,0.1)"
-      }}>Portfolio</a>
-      <a href="#contact" style={{
-        textDecoration: "none",
-        color: "#333",
-        fontWeight: "500",
-        fontSize: isMobile ? "0.9rem" : "1rem",
-        padding: isMobile ? "0.5rem 0.8rem" : "0.5rem 1rem",
-        borderRadius: "8px",
-        transition: "all 0.3s ease",
-        background: "rgba(255,255,255,0.1)"
-      }}>Contact</a>
+    <div className={`
+      fixed top-0 w-full z-50 flex justify-center 
+      ${isMobile ? 'gap-4 px-4 py-3' : 'gap-8 px-4 py-4'}
+      bg-white/75 backdrop-blur-sm border-b border-white/20
+    `}>
+      {['home', 'about', 'portfolio', 'contact'].map((section) => (
+        <a 
+          key={section}
+          href={`#${section}`}
+          className={`
+            no-underline text-gray-800 font-medium capitalize
+            ${isMobile ? 'text-sm px-3 py-2' : 'text-base px-4 py-2'}
+            rounded-lg transition-all duration-300 bg-white/10
+            hover:bg-blue-500/20 hover:text-blue-600 hover:scale-105
+          `}
+        >
+          {section}
+        </a>
+      ))}
     </div>
   );
 };

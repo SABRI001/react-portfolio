@@ -74,139 +74,64 @@ const Portfolio = () => {
   }, []);
 
   return (
-    <section className="padding" id="portfolio" style={{
-      background: "linear-gradient(135deg, #0f1419 0%, #1a1f36 50%, #0f1419 100%)",
-      position: "relative",
-      overflow: "hidden"
-    }}>
+    <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" id="portfolio">
       {/* Animated Background Elements */}
-      <div style={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-        zIndex: 1,
-        pointerEvents: "none"
-      }}>
+      <div className="absolute inset-0 z-10 pointer-events-none">
         {/* Floating geometric shapes */}
         {[...Array(12)].map((_, i) => (
           <div
             key={`bg-shape-${i}`}
+            className={`absolute ${i % 2 === 0 ? 'rounded-full' : 'rounded-none'} ${i % 3 === 0 ? 'rotate-45' : 'rotate-0'}`}
             style={{
-              position: "absolute",
               width: `${8 + i * 3}px`,
               height: `${8 + i * 3}px`,
               background: `rgba(37, 99, 235, ${0.1 - i * 0.005})`,
-              borderRadius: i % 2 === 0 ? "50%" : "0%",
               top: `${5 + i * 8}%`,
               left: `${3 + i * 8}%`,
-              animation: `floatingCircle ${4 + i * 0.3}s infinite ease-in-out`,
+              animation: `floating-circle ${4 + i * 0.3}s infinite ease-in-out`,
               animationDelay: `${i * 0.2}s`,
-              transform: i % 3 === 0 ? "rotate(45deg)" : "rotate(0deg)"
             }}
           />
         ))}
       </div>
 
       {/* Section Header */}
-      <div style={{
-        textAlign: "center",
-        marginBottom: isMobile ? "2rem" : "4rem",
-        position: "relative",
-        zIndex: 2,
-        padding: isMobile ? "0 1rem" : "0"
-      }}>
-        <h2 style={{
-          background: "linear-gradient(135deg, #ffffff, #e0f2fe)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          backgroundClip: "text",
-          fontSize: isMobile ? "2rem" : isTablet ? "2.5rem" : "3rem",
-          fontWeight: "bold",
-          margin: "0 0 1rem 0",
-          textShadow: "0 4px 8px rgba(0,0,0,0.3)",
-          animation: "fadeInUp 0.8s ease-out",
-          filter: "drop-shadow(0 0 10px rgba(255,255,255,0.3))"
-        }}>Portfolio</h2>
+      <div className={`text-center relative z-20 ${isMobile ? 'mb-8 px-4' : 'mb-16'}`}>
+        <h2 className={`bg-gradient-to-br from-white to-cyan-100 bg-clip-text text-transparent font-bold text-center mb-4 ${isMobile ? 'text-3xl' : isTablet ? 'text-4xl' : 'text-5xl'}`}
+          style={{ 
+            textShadow: "0 4px 8px rgba(0,0,0,0.3)",
+            animation: "fade-in-up 0.8s ease-out",
+            filter: "drop-shadow(0 0 10px rgba(255,255,255,0.3))"
+          }}>
+          Portfolio
+        </h2>
         
-        <div style={{
-          width: "100px",
-          height: "4px",
-          background: "linear-gradient(135deg, #2563EB, #1d4ed8)",
-          margin: "0 auto",
-          borderRadius: "2px",
-          animation: "slideInLeft 0.8s ease-out 0.3s both"
-        }} />
+        <div className="w-25 h-1 bg-gradient-to-r from-blue-600 to-blue-700 mx-auto rounded"
+          style={{ animation: "slide-in-left 0.8s ease-out 0.3s both" }} />
       </div>
 
       {/* Portfolio Content Container */}
-      <div style={{
-        display: "flex",
-        flexDirection: isMobile ? "column" : "row",
-        alignItems: "stretch",
-        gap: isMobile ? "2rem" : "3rem",
-        maxWidth: "1400px",
-        margin: "0 auto",
-        position: "relative",
-        zIndex: 2,
-        padding: isMobile ? "0 1rem" : isTablet ? "0 1.5rem" : "0 2rem"
-      }}>
+      <div className={`flex items-stretch relative z-20 max-w-7xl mx-auto ${isMobile ? 'flex-col gap-8 px-4' : 'flex-row gap-12'} ${isTablet ? 'px-6' : 'px-8'}`}>
         
         {/* Left Side - Tech Visualization */}
-        <div style={{
-          flex: "1",
-          maxWidth: isMobile ? "100%" : "500px",
-          position: "relative",
-          height: "100%",
-          display: "flex"
-        }}>
+        <div className={`flex-1 relative h-full flex ${isMobile ? 'max-w-full' : 'max-w-lg'}`}>
           {/* Glassmorphism container for image */}
-          <div style={{
-            background: "rgba(255, 255, 255, 0.1)",
-            backdropFilter: "blur(20px)",
-            borderRadius: isMobile ? "20px" : "25px",
-            border: "1px solid rgba(255, 255, 255, 0.2)",
-            padding: isMobile ? "1.5rem" : "2rem",
-            boxShadow: "0 25px 50px rgba(0, 0, 0, 0.1)",
-            animation: "slideInLeft 0.8s ease-out 0.5s both",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            width: "100%"
-          }}>
-            <div style={{
-              borderRadius: "20px",
-              overflow: "hidden",
-              position: "relative",
-              background: "linear-gradient(135deg, #2563EB, #1d4ed8)",
-              flex: "1 1 auto",
-              minHeight: isMobile ? "200px" : "300px"
-            }}>
+          <div className={`glass-morphism flex flex-col justify-between w-full ${isMobile ? 'p-6 rounded-2xl' : 'p-8 rounded-3xl'}`}
+            style={{ animation: "slide-in-left 0.8s ease-out 0.5s both" }}>
+            <div className={`rounded-2xl overflow-hidden relative bg-gradient-to-br from-blue-600 to-blue-700 flex-1 ${isMobile ? 'min-h-[200px]' : 'min-h-[300px]'}`}>
               {/* Tech pattern overlay */}
-              <div style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                background: `
-                  radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 0%, transparent 50%),
-                  radial-gradient(circle at 75% 75%, rgba(255,255,255,0.1) 0%, transparent 50%)
-                `,
-                zIndex: 2
-              }} />
+              <div className="absolute inset-0 z-20"
+                style={{
+                  background: `
+                    radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 75% 75%, rgba(255,255,255,0.1) 0%, transparent 50%)
+                  `
+                }} />
               
               <img
                 src={image}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  minHeight: isMobile ? "250px" : "400px",
-                  objectFit: "cover",
-                  transition: "transform 0.5s ease",
-                  filter: "brightness(0.8) contrast(1.1)"
-                }}
+                className={`w-full h-full object-cover transition-transform duration-500 ${isMobile ? 'min-h-[250px]' : 'min-h-[400px]'}`}
+                style={{ filter: "brightness(0.8) contrast(1.1)" }}
                 alt={imageAltText}
                 onMouseEnter={(e) => {
                   e.target.style.transform = "scale(1.1)";
@@ -218,37 +143,22 @@ const Portfolio = () => {
             </div>
             
             {/* Tech stats overlay */}
-            <div style={{
-              marginTop: "1.5rem",
-              display: "grid",
-              gridTemplateColumns: isMobile ? "1fr 1fr" : "1fr 1fr",
-              gap: isMobile ? "0.8rem" : "1rem",
-              flex: "0 0 auto"
-            }}>
+            <div className={`mt-6 grid gap-3 flex-shrink-0 ${isMobile ? 'grid-cols-2' : 'grid-cols-2'}`}>
               {[
                 { label: "Projects", value: "15+" },
                 { label: "Technologies", value: "10+" },
                 { label: "Experience", value: "2+ Years" },
                 { label: "Certifications", value: "4" }
               ].map((stat, i) => (
-                <div key={stat.label} style={{
-                  textAlign: "center",
-                  padding: isMobile ? "0.8rem" : "1rem",
-                  background: "rgba(255, 255, 255, 0.1)",
-                  borderRadius: "15px",
-                  border: "1px solid rgba(255, 255, 255, 0.1)",
-                  animation: `fadeInUp 0.6s ease-out ${0.8 + i * 0.1}s both`
-                }}>
-                  <div style={{
-                    fontSize: isMobile ? "1.2rem" : "1.5rem",
-                    fontWeight: "bold",
-                    color: "#ffffff",
-                    marginBottom: "0.5rem"
-                  }}>{stat.value}</div>
-                  <div style={{
-                    fontSize: isMobile ? "0.8rem" : "0.9rem",
-                    color: "rgba(255, 255, 255, 0.8)"
-                  }}>{stat.label}</div>
+                <div key={stat.label} 
+                  className={`text-center bg-white/10 border border-white/10 rounded-2xl ${isMobile ? 'p-3' : 'p-4'}`}
+                  style={{ animation: `fade-in-up 0.6s ease-out ${0.8 + i * 0.1}s both` }}>
+                  <div className={`font-bold text-white mb-2 ${isMobile ? 'text-xl' : 'text-2xl'}`}>
+                    {stat.value}
+                  </div>
+                  <div className={`text-white/80 ${isMobile ? 'text-xs' : 'text-sm'}`}>
+                    {stat.label}
+                  </div>
                 </div>
               ))}
             </div>
@@ -256,29 +166,12 @@ const Portfolio = () => {
         </div>
 
         {/* Right Side - Project Cards */}
-        <div style={{
-          flex: "1",
-          display: "grid",
-          gridTemplateColumns: isMobile ? "1fr" : isTablet ? "1fr" : "1fr 1fr",
-          gap: isMobile ? "1rem" : "1.5rem",
-          alignContent: "start"
-        }}>
+        <div className={`flex-1 grid content-start ${isMobile ? 'grid-cols-1 gap-4' : isTablet ? 'grid-cols-1 gap-6' : 'grid-cols-2 gap-6'}`}>
           {projectList.map((project, index) => (
             <div
               key={project.title}
-              style={{
-                background: "rgba(255, 255, 255, 0.1)",
-                backdropFilter: "blur(20px)",
-                borderRadius: isMobile ? "15px" : "20px",
-                border: "1px solid rgba(255, 255, 255, 0.2)",
-                padding: isMobile ? "1.5rem 1rem" : "2rem 1.5rem",
-                boxShadow: "0 15px 35px rgba(0, 0, 0, 0.1)",
-                transition: "all 0.4s ease",
-                cursor: "pointer",
-                position: "relative",
-                overflow: "hidden",
-                animation: `fadeInUp 0.6s ease-out ${0.2 + index * 0.15}s both`
-              }}
+              className={`glass-morphism relative overflow-hidden cursor-pointer transition-all duration-400 ${isMobile ? 'p-4 rounded-2xl' : 'p-6 rounded-2xl'}`}
+              style={{ animation: `fade-in-up 0.6s ease-out ${0.2 + index * 0.15}s both` }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = "translateY(-10px) scale(1.02)";
                 e.currentTarget.style.boxShadow = "0 25px 50px rgba(37, 99, 235, 0.2)";
@@ -292,78 +185,29 @@ const Portfolio = () => {
               onClick={() => window.open(project.url, '_blank')}
             >
               {/* Animated border effect */}
-              <div style={{
-                position: "absolute",
-                top: 0,
-                left: "-100%",
-                width: "100%",
-                height: "2px",
-                background: "linear-gradient(90deg, transparent, #2563EB, transparent)",
-                transition: "left 0.6s ease",
-                animation: `movingLine 3s infinite ease-in-out ${index * 0.5}s`
-              }} />
+              <div className="absolute top-0 -left-full w-full h-0.5 bg-gradient-to-r from-transparent via-blue-600 to-transparent transition-all duration-600"
+                style={{ animation: `moving-line 3s infinite ease-in-out ${index * 0.5}s` }} />
 
               {/* Project icon */}
-              <div style={{
-                width: "50px",
-                height: "50px",
-                background: "linear-gradient(135deg, #2563EB, #1d4ed8)",
-                borderRadius: "15px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                marginBottom: "1.5rem",
-                boxShadow: "0 10px 20px rgba(37, 99, 235, 0.3)"
-              }}>
-                <div style={{
-                  width: "20px",
-                  height: "20px",
-                  background: "white",
-                  borderRadius: "3px",
-                  position: "relative"
-                }}>
-                  <div style={{
-                    position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    transform: "translate(-50%, -50%)",
-                    width: "8px",
-                    height: "8px",
-                    background: "#2563EB",
-                    borderRadius: "50%"
-                  }} />
+              <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl flex items-center justify-center mb-6"
+                style={{ boxShadow: "0 10px 20px rgba(37, 99, 235, 0.3)" }}>
+                <div className="w-5 h-5 bg-white rounded relative">
+                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-blue-600 rounded-full" />
                 </div>
               </div>
 
-              <h3 style={{
-                color: "#ffffff",
-                fontSize: isMobile ? "1.1rem" : "1.3rem",
-                fontWeight: "600",
-                margin: "0 0 1rem 0",
-                transition: "color 0.3s ease"
-              }}>{project.title}</h3>
+              <h3 className={`text-white font-semibold mb-4 transition-colors duration-300 ${isMobile ? 'text-lg' : 'text-xl'}`}>
+                {project.title}
+              </h3>
 
-              <p style={{
-                color: "rgba(255, 255, 255, 0.8)",
-                fontSize: isMobile ? "0.9rem" : "0.95rem",
-                lineHeight: "1.6",
-                margin: "0 0 1.5rem 0"
-              }}>{project.description}</p>
+              <p className={`text-white/80 leading-relaxed mb-6 ${isMobile ? 'text-sm' : 'text-base'}`}>
+                {project.description}
+              </p>
 
               {/* View project link */}
-              <div style={{
-                display: "flex",
-                alignItems: "center",
-                color: "#2563EB",
-                fontSize: isMobile ? "0.85rem" : "0.9rem",
-                fontWeight: "600",
-                transition: "all 0.3s ease"
-              }}>
+              <div className={`flex items-center text-blue-600 font-semibold transition-all duration-300 ${isMobile ? 'text-sm' : 'text-base'}`}>
                 <span>View Project</span>
-                <span style={{
-                  marginLeft: "0.5rem",
-                  transition: "transform 0.3s ease"
-                }}>→</span>
+                <span className="ml-2 transition-transform duration-300">→</span>
               </div>
             </div>
           ))}
